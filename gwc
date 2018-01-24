@@ -1,0 +1,74 @@
+<script>
+		//单个商品选中
+		$('.select em').click(function() {
+			if($(this).hasClass('pitch_on')) {
+				$(this).removeClass('pitch_on')
+				$('#all_pitch_on').removeClass('pitch_on')
+				$('#z_money').text(js_fen())
+				$('.jiesuan').text(js_fen())
+			} else {
+				$(this).addClass('pitch_on')
+				$('#z_money').text(js_fen())
+				$('.jiesuan').text(js_fen())
+
+			}
+			
+	
+		})
+
+		//全部商品选中		
+		$('#all_pitch_on').click(function() {
+//			var c = 0
+			if($(this).hasClass('pitch_on')) {
+				$(this).removeClass('pitch_on')
+				$('.select em').removeClass('pitch_on')
+			} else {
+				$(this).addClass('pitch_on')
+				$('.select em').addClass('pitch_on')
+			}
+					$('#z_money').text(js_fen())
+				$('.jiesuan').text(js_fen())
+		})
+
+		//加号
+		$('.jia').click(function() {
+			var num = $(this).siblings('.zi').text();
+			num++
+			$(this).siblings('.zi').text(num);
+			if($(this).parents('.div_center').siblings('em').hasClass('pitch_on')) {
+				$('#z_money').text(js_fen())
+				$('.jiesuan').text(js_fen())
+			}
+
+		})
+
+		//减号
+		$('.jian').click(function() {
+			
+			var num = $(this).siblings('.zi').text();
+			if(num == 1) {
+				num = 1
+			} else {
+				num--
+			}
+			$(this).siblings('.zi').text(num);
+			if($(this).parents('.div_center').siblings('em').hasClass('pitch_on')) {
+				$('#z_money').text(js_fen())
+				$('.jiesuan').text(js_fen())
+			}
+		})
+
+		function js_fen(){
+			var z_money = 0;
+			var Li = document.getElementsByClassName('select')
+			for(var i = 0;i<Li.length;i++){
+				var num = $(Li[i]).children('div').children('div').children('.zi').text();
+				var money = $(Li[i]).children('div').children('p').children('.qu_su').text();
+				if($(Li[i]).children('em').hasClass('pitch_on')){
+					 z_money += num*money
+				}			
+			}
+
+			return z_money;
+		}
+	</script>
